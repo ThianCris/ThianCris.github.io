@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio de Cristhian Sabino, analista de BI em Belo Horizonte. Projetos de dados em Power BI e Python: pontualidade de voos em Confins, execucao orcamentaria e overview comercial.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cristhian Sabino — Dados e BI">
+<meta property="og:description" content="Analista de BI. Projetos em Power BI e Python: pontualidade de voos em Confins, execucao orcamentaria e overview comercial.">
+<meta property="og:image" content="https://thiancris.github.io/confins.png">
+<meta property="og:url" content="https://thiancris.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{margin:0}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Cristhian Sabino — Dados e BI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+/* Layout: ficha técnica — trilho de rótulos em monoespaçada à esquerda, conteúdo à direita; projetos como fichas de largura total */
+:root{
+  --bg:#F5F7F8;
+  --surface:#FFFFFF;
+  --plate:#EDF1F3;
+  --ink:#0F161B;
+  --muted:#5A6C77;
+  --line:#DCE3E7;
+  --accent:#0C6878;
+  --accent-soft:#E0EFF1;
+
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --maxw:1080px;
+  --rail:150px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1317;
+    --surface:#141B20;
+    --plate:#1A232A;
+    --ink:#E8EEF2;
+    --muted:#95A5B0;
+    --line:#26323A;
+    --accent:#56BED1;
+    --accent-soft:#143039;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1317;
+  --surface:#141B20;
+  --plate:#1A232A;
+  --ink:#E8EEF2;
+  --muted:#95A5B0;
+  --line:#26323A;
+  --accent:#56BED1;
+  --accent-soft:#143039;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:1.0625rem;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+img{display:block;max-width:100%;height:auto}
+
+/* ---------- rótulos ---------- */
+.lbl{
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ---------- cabeçalho ---------- */
+header{padding-block:clamp(44px,8vw,88px) clamp(28px,5vw,52px)}
+.kicker{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-bottom:1.6rem}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.5rem,7.5vw,4.25rem);
+  line-height:1.02;
+  letter-spacing:-.025em;
+  margin:0 0 1.1rem;
+  text-wrap:balance;
+}
+h1 .thin{font-weight:500;color:var(--muted);display:block}
+.lede{max-width:62ch;margin:0 0 2rem;font-size:1.1875rem;color:var(--ink)}
+.lede strong{font-weight:600}
+
+.links{display:flex;flex-wrap:wrap;gap:.6rem}
+.btn{
+  font-family:var(--mono);
+  font-size:.8125rem;
+  letter-spacing:.04em;
+  text-decoration:none;
+  color:var(--ink);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:.62rem 1rem;
+  transition:border-color .15s, color .15s;
+}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{color:#fff;opacity:.9}
+
+/* ---------- régua ---------- */
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+/* ---------- seção com trilho ---------- */
+section{padding-block:clamp(40px,6vw,72px)}
+.grid{display:grid;grid-template-columns:var(--rail) 1fr;gap:clamp(20px,4vw,48px);align-items:start}
+.grid > .lbl{padding-top:.42rem}
+h2{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(1.35rem,2.6vw,1.75rem);
+  letter-spacing:-.015em;
+  line-height:1.2;
+  margin:0 0 .9rem;
+  text-wrap:balance;
+}
+.prose{max-width:64ch}
+.prose p{margin:0 0 1rem}
+.prose p:last-child{margin-bottom:0}
+
+/* ---------- projetos ---------- */
+.proj{border-top:1px solid var(--line);padding-block:clamp(34px,5vw,58px)}
+.proj:first-of-type{border-top:0}
+.proj-head{display:flex;gap:1rem;align-items:baseline;margin-bottom:.35rem}
+.num{font-family:var(--mono);font-size:.8125rem;color:var(--accent);font-weight:500}
+.proj h3{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(1.45rem,3.2vw,2rem);
+  letter-spacing:-.02em;
+  line-height:1.12;
+  margin:0;
+  text-wrap:balance;
+}
+.proj-sub{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:0 0 1.5rem;padding-left:calc(.8125rem + 1rem)}
+
+.proj-body{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.5vw,40px);align-items:start}
+.shot{
+  border:1px solid var(--line);
+  border-radius:4px;
+  overflow:hidden;
+  background:var(--plate);
+}
+.shot img{width:100%}
+.caption{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding:.55rem .7rem;border-top:1px solid var(--line);background:var(--surface)}
+
+.spec{margin:0 0 1.25rem;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1.1rem;font-size:.9375rem}
+.spec dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:.3rem;white-space:nowrap}
+.spec dd{margin:0}
+
+.figs{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;margin:1.1rem 0 1.25rem;padding:.85rem 0;border-block:1px solid var(--line)}
+.fig{min-width:0}
+.fig b{display:block;font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1.15}
+.fig span{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+
+.stack{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 1.3rem;padding:0;list-style:none}
+.stack li{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;
+  color:var(--accent);background:var(--accent-soft);
+  border-radius:3px;padding:.26rem .5rem;
+}
+.more{font-family:var(--mono);font-size:.8125rem;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:.15rem}
+.more:hover{border-color:var(--accent)}
+
+/* ---------- competências ---------- */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1.6rem 2rem}
+.skills h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 .5rem}
+.skills ul{margin:0;padding:0;list-style:none;font-size:.9375rem}
+.skills li{padding:.14rem 0}
+
+/* ---------- trajetória ---------- */
+.track{display:grid;gap:1.5rem}
+.item{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:start}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:.62rem}
+.dot.past{background:var(--line)}
+.item h4{font-family:var(--display);font-weight:600;font-size:1.0625rem;margin:0 0 .15rem}
+.item p{margin:0;font-size:.9375rem;color:var(--muted)}
+
+/* ---------- rodapé ---------- */
+footer{padding-block:clamp(40px,6vw,72px) clamp(48px,8vw,90px);border-top:1px solid var(--line)}
+.foot-name{font-family:var(--display);font-weight:600;font-size:1.0625rem;margin:1.6rem 0 0;color:var(--muted)}
+.contact{margin:0 0 1.6rem;padding:0;list-style:none;max-width:34rem}
+.contact li{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;padding:.72rem 0;border-bottom:1px solid var(--line)}
+.contact li:first-child{border-top:1px solid var(--line)}
+.c-lbl{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);flex:0 0 4.6rem}
+.c-val{font-family:var(--display);font-weight:500;font-size:1.0625rem;user-select:all;word-break:break-word;min-width:0;flex:1 1 12rem;font-variant-numeric:tabular-nums}
+.copy{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:3px;
+  padding:.3rem .55rem;cursor:pointer;transition:border-color .15s,color .15s;flex:0 0 auto;
+}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+.copy[data-done="1"]{color:var(--accent);border-color:var(--accent)}
+
+@media (max-width:760px){
+  .grid{grid-template-columns:1fr;gap:.6rem}
+  .grid > .lbl{padding-top:0}
+  .proj-body{grid-template-columns:1fr}
+  .proj-sub{padding-left:0}
+  :root{--rail:auto}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">
+      <span class="lbl">Analista de BI</span>
+      <span class="lbl">Belo Horizonte · MG</span>
+      <span class="lbl">Power BI · SQL · Python</span>
+    </div>
+    <h1>Cristhian Sabino<span class="thin">Dados que respondem perguntas</span></h1>
+    <p class="lede">Trabalho com <strong>Power BI, SQL e Python</strong> para transformar base crua em indicador que alguém usa para decidir. Vim do suporte técnico, onde aprendi a olhar para o problema antes da ferramenta, e hoje atuo como analista de BI.</p>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/ThianCris">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/cristhiansabinosimplicio/">LinkedIn</a>
+      <a class="btn" href="#projetos">Ver projetos</a>
+    </div>
+  </header>
+
+  <hr class="rule">
+
+  <section>
+    <div class="grid">
+      <span class="lbl">Sobre</span>
+      <div class="prose">
+        <p>Comecei em suporte técnico de TI, atendendo chamados de nível 2. Foi ali que percebi que a parte que mais me interessava não era resolver o chamado, era entender por que ele se repetia — e isso exigia olhar os dados.</p>
+        <p>Me formei em Análise e Desenvolvimento de Sistemas em 2026 e hoje trabalho como analista de BI, construindo dashboards em Power BI e indicadores de desempenho. Em paralelo estudo ETL com Pentaho e mantenho projetos próprios em Python para praticar a parte de engenharia dos dados, que é onde o trabalho de verdade costuma estar.</p>
+        <p>O que eu procuro em um projeto: a pergunta clara, o dado tratado com critério documentado, e um painel que não precise de explicação ao lado.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="projetos">
+    <div class="grid">
+      <span class="lbl">Projetos</span>
+      <div>
+
+        <article class="proj">
+          <div class="proj-head">
+            <span class="num">01</span>
+            <h3>Pontualidade em Confins</h3>
+          </div>
+          <p class="proj-sub">ETL em Python + painel em Power BI · dados abertos da ANAC</p>
+
+          <div class="proj-body">
+            <div>
+              <dl class="spec">
+                <dt>Pergunta</dt>
+                <dd>Quando e por que os voos atrasam no Aeroporto de Confins?</dd>
+                <dt>Base</dt>
+                <dd>VRA da ANAC, 8 arquivos mensais, jan–ago/2026</dd>
+                <dt>Volume</dt>
+                <dd>74.732 voos tratados</dd>
+              </dl>
+
+              <p style="margin:0 0 1rem">A base da ANAC traz uma linha por trecho A→B e nenhuma métrica calculada. O pipeline em pandas muda a perspectiva para <em>movimento em Confins</em> — partida quando o aeroporto é origem, chegada quando é destino — calcula o atraso e aplica o critério oficial de 30 minutos. Cancelados e voos extras ficam fora do denominador, não contados como atraso.</p>
+
+              <div class="figs">
+                <div class="fig"><b>91,7%</b><span>Pontualidade</span></div>
+                <div class="fig"><b>1,7%</b><span>Cancelamento</span></div>
+                <div class="fig"><b>3,8 min</b><span>Atraso médio</span></div>
+              </div>
+
+              <p style="margin:0 0 1.2rem">O padrão mais forte é o acúmulo ao longo do dia: 95,5% na madrugada contra 90,0% à noite. O pior ponto da semana é sexta à tarde, com 86,7%.</p>
+
+              <ul class="stack">
+                <li>Python</li><li>pandas</li><li>Power BI</li><li>DAX</li><li>Modelo estrela</li><li>PBIP</li>
+              </ul>
+              <a class="more" href="https://github.com/ThianCris/pontualidade-confins">Código e metodologia no GitHub →</a>
+            </div>
+
+            <div class="shot">
+              <img src="confins.png" alt="Painel de pontualidade em Confins: cartões de pontualidade, cancelamento e atraso médio, gráfico de linha mensal, barras por companhia e mapa de calor por dia e faixa de horário" width="1064" height="505">
+              <div class="caption">Página principal do relatório no Power BI</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-head">
+            <span class="num">02</span>
+            <h3>Execução orçamentária</h3>
+          </div>
+          <p class="proj-sub">Painel de acompanhamento em Power BI</p>
+
+          <div class="proj-body">
+            <div>
+              <dl class="spec">
+                <dt>Objetivo</dt>
+                <dd>Acompanhar dotação, empenho, liquidação e pagamento por unidade gestora</dd>
+                <dt>Recorte</dt>
+                <dd>Ano, UF e unidade gestora executora</dd>
+              </dl>
+
+              <p style="margin:0 0 1rem">Painel com os quatro estágios da despesa em cartões, execução detalhada por UGE, unidade orçamentária, grupo e subgrupo, série mensal da execução e distribuição geográfica por unidade. Os percentuais de empenho realizado e de despesa liquidada ficam como medidores no topo, para leitura imediata.</p>
+
+              <p style="margin:0 0 1.2rem">O trabalho pesado está no Power Query e na modelagem: dimensões separadas da tabela de fatos, hierarquia de despesa e medidas DAX para os estágios e seus percentuais.</p>
+
+              <ul class="stack">
+                <li>Power BI</li><li>Power Query</li><li>DAX</li><li>Modelagem dimensional</li>
+              </ul>
+              <a class="more" href="https://github.com/ThianCris/painel-aprimoramento-gestao-powerbi">Ver o projeto no GitHub →</a>
+            </div>
+
+            <div class="shot">
+              <img src="orcamento.png" alt="Painel de execução orçamentária com cartões de dotação, empenhado, liquidado e pago, tabela por unidade gestora, gráfico de área mensal e mapa do Brasil" width="930" height="505">
+              <div class="caption">Visão de execução por unidade gestora</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-head">
+            <span class="num">03</span>
+            <h3>Overview comercial</h3>
+          </div>
+          <p class="proj-sub">Painel de vendas em Power BI · modelo estrela e medidas de crescimento</p>
+
+          <div class="proj-body">
+            <div>
+              <dl class="spec">
+                <dt>Objetivo</dt>
+                <dd>Acompanhar faturamento, volume e ticket médio com comparação contra o ano anterior</dd>
+                <dt>Modelo</dt>
+                <dd>Fato de vendas com as dimensões calendário, produto, loja e vendedor</dd>
+                <dt>Páginas</dt>
+                <dd>Overview geral e ranking</dd>
+              </dl>
+
+              <p style="margin:0 0 1rem">Os três indicadores do topo trazem o valor e, abaixo, a variação contra o mesmo período do ano anterior — é a leitura que o comercial precisa primeiro. A evolução do faturamento é mostrada por trimestre em dois anos lado a lado, e não por mês, para que a comparação anual seja direta.</p>
+
+              <div class="figs">
+                <div class="fig"><b>R$ 9,17 Mi</b><span>Faturamento</span></div>
+                <div class="fig"><b>4.996</b><span>Itens vendidos</span></div>
+                <div class="fig"><b>1.835</b><span>Ticket médio</span></div>
+              </div>
+
+              <p style="margin:0 0 1.2rem">As medidas ficam em tabela própria, separadas das dimensões: faturamento, quantidade, ticket médio, os três crescimentos e os rankings de produto e de vendedor, que alimentam a segunda página.</p>
+
+              <ul class="stack">
+                <li>Power BI</li><li>DAX</li><li>Modelo estrela</li><li>Tabela de medidas</li><li>Inteligência temporal</li>
+              </ul>
+            </div>
+
+            <div class="shot">
+              <img src="comercial.png" alt="Dashboard comercial com cartões de faturamento, quantidade vendida e ticket médio, evolução trimestral do faturamento, ticket médio e faturamento por produto, e mapa de faturamento por localização" width="872" height="493">
+              <div class="caption">Página de overview geral</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="grid">
+      <span class="lbl">Competências</span>
+      <div class="skills">
+        <div>
+          <h4>Visualização</h4>
+          <ul>
+            <li>Power BI Desktop</li>
+            <li>DAX</li>
+            <li>Power Query (M)</li>
+            <li>Modelagem dimensional</li>
+            <li>Temas e layout de relatório</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Dados</h4>
+          <ul>
+            <li>SQL</li>
+            <li>Python · pandas</li>
+            <li>Tratamento e validação</li>
+            <li>Dados abertos</li>
+            <li>Documentação de método</li>
+          </ul>
+        </div>
+        <div>
+          <h4>ETL</h4>
+          <ul>
+            <li>Pipelines em Python</li>
+            <li>Pentaho (em formação)</li>
+            <li>Consolidação de bases</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Apoio</h4>
+          <ul>
+            <li>Git e GitHub</li>
+            <li>PBIP para versionar relatório</li>
+            <li>Excel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="grid">
+      <span class="lbl">Trajetória</span>
+      <div class="track">
+        <div class="item">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <h4>Analista de BI · Orbe Experience</h4>
+            <p>Dashboards em Power BI, consultas em SQL e indicadores de desempenho.</p>
+          </div>
+        </div>
+        <div class="item">
+          <span class="dot past" aria-hidden="true"></span>
+          <div>
+            <h4>Técnico de Suporte em TI · Nível 2</h4>
+            <p>Atendimento e resolução de chamados técnicos. Origem da transição para dados.</p>
+          </div>
+        </div>
+        <div class="item">
+          <span class="dot past" aria-hidden="true"></span>
+          <div>
+            <h4>Análise e Desenvolvimento de Sistemas</h4>
+            <p>Graduação concluída em 2026.</p>
+          </div>
+        </div>
+        <div class="item">
+          <span class="dot past" aria-hidden="true"></span>
+          <div>
+            <h4>ETL com Pentaho</h4>
+            <p>Curso em andamento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="grid">
+      <span class="lbl">Contato</span>
+      <div>
+        <h2 style="margin-bottom:1.4rem">Aberto a vagas de analista de BI e de dados</h2>
+        <ul class="contact">
+          <li>
+            <span class="c-lbl">E-mail</span>
+            <span class="c-val" id="v-mail">cristhiansimplicio@hotmail.com</span>
+            <button class="copy" type="button" data-for="v-mail">Copiar</button>
+          </li>
+          <li>
+            <span class="c-lbl">Telefone</span>
+            <span class="c-val" id="v-tel">(31) 98280-2280</span>
+            <button class="copy" type="button" data-for="v-tel">Copiar</button>
+          </li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="https://www.linkedin.com/in/cristhiansabinosimplicio/">LinkedIn</a>
+          <a class="btn" href="https://github.com/ThianCris">github.com/ThianCris</a>
+        </div>
+        <p class="foot-name">Cristhian Sabino Simplicio · Belo Horizonte, MG</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.for);
+    if (!el) return;
+    var done = function () {
+      btn.textContent = 'Copiado';
+      btn.dataset.done = '1';
+      setTimeout(function () { btn.textContent = 'Copiar'; btn.dataset.done = '0'; }, 1800);
+    };
+    var select = function () {
+      try {
+        var r = document.createRange();
+        r.selectNodeContents(el);
+        var s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+        btn.textContent = 'Selecionado';
+        setTimeout(function () { btn.textContent = 'Copiar'; }, 1800);
+      } catch (e) { /* nada a fazer */ }
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(el.textContent.trim()).then(done, select);
+      } else { select(); }
+    } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>
